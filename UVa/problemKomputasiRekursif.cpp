@@ -1,4 +1,4 @@
-#include<stdio.h>
+#include<bits/stdc++.h>
 
 using namespace std;
 
@@ -22,10 +22,11 @@ using namespace std;
 */
 
 typedef struct {
-    int m[40][40];
+    long long m[40][40];
 } Matrix;
 
 Matrix Obj, Nul, I;
+int fiboN;
 
 Matrix kaliMatrix(Matrix X, Matrix Y, int n) {
     Matrix M = Nul;
@@ -48,24 +49,57 @@ Matrix pangkatMatrix(int n, int k) {
     return X;
 }
 
-int main() {
-    int i, j, k, hasil;
-    int n = 2;
-    Matrix T, F;
-    scanf("%d", &k);
-    k--;
-    for(i = 0; i < n; i++) scanf("%d", &F.m[0][i]);
-    
-	for(i = 0; i < n; i++)
-		for(j = 0; j < n; j++)
-			Obj.m[i][j] = 0, I.m[i][j] = 0,
+long long fiboRekursif(int n){
+	if(n<=1) return 1;
+	else return fiboRekursif(n-1)+fiboRekursif(n-2);
+}
+
+void solveMainstream(){
+	long long hasil;
+	hasil = fiboRekursif(fiboN);
+	printf("Hasil (cara rekursif): %lld\n",hasil);
+}
+
+void solve(){
+	int i, j;
+	long long hasil;
+	int n = 2;
+	Matrix T, F;
+	fiboN--;
+	for(i = 0; i < n; i++){
+		for(j = 0; j < n; j++){
+			Obj.m[i][j] = 0;
+			I.m[i][j] = 0;
 			Nul.m[i][j] = 0;
+		}
+	}
 	for(i = 0; i < n; i++) I.m[i][i] = 1; // bikin mat identitas
-	for(i = 0; i < n; i++)
-		for(j = 0; j < n; j++)
-			scanf("%d", &Obj.m[i][j]);
-	T = pangkatMatrix(n, k);
+	for(i = 0; i < n; i++){
+		for(j = 0; j < n; j++){
+			if(i) Obj.m[i][j] = 1;
+			else Obj.m[i][j] = j;
+		}
+		F.m[0][i] = i;
+	}
+	T = pangkatMatrix(n, fiboN);
 	hasil = (T.m[1][0]*F.m[0][0]) + (T.m[1][1]*F.m[0][1]);
-	printf("%d\n", hasil);
-    return 0;
+	printf("Hasil (cara matrix)  : %lld\n", hasil);
+}
+
+int main() {
+	scanf("%d",&fiboN); // cari fib(N)
+	clock_t mulai1 = clock(); // mulai timer
+	solve();
+	clock_t finish1 = clock(); // stop timer
+	double timeExec1 = (double)(finish1 - mulai1) / CLOCKS_PER_SEC;
+	
+	clock_t mulai2 = clock(); // mulai timer
+	solveMainstream();
+	clock_t finish2 = clock(); // stop timer
+	double timeExec2 = (double)(finish2 - mulai2) / CLOCKS_PER_SEC;
+	
+	printf("\nTime Execution (cara matrix)  : %f sekon\n", timeExec1);
+	printf("Time Execution (cara rekursif): %f sekon\n", timeExec2);
+	printf("Optimasi: %.0fx\n",(double)(timeExec2/timeExec1));
+	return 0;
 }
