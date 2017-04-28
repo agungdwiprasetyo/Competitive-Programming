@@ -3,24 +3,27 @@ using namespace std;
 
 int main()
 {
-    char kata[1023];
-    char katabaru[1023];
-    int maks=0,minim=26,angka;
+	list<int> l;
+    //char kata[1023];
+    string kata;
+    int maks,minim;
     int i=0;
     int sum=0;
-    gets(kata);
-    while(kata[i]!=NULL)
+    //gets(kata); // for char
+    getline(cin, kata); // for string
+    cout << kata << endl;
+    while(kata[i]!='\0')
     {
         kata[i]=tolower(kata[i]);
         if(kata[i]>=97 && kata[i]<=122){
-            katabaru[i]=kata[i];
-            angka=katabaru[i]-96;
-            if(angka>maks) maks=angka;
-            if(angka<minim) minim=angka;
-            sum+=angka;
+			l.push_back(kata[i]-96);
         }
         i++;
     }
-    cout << katabaru << " " << minim << " " << maks << " " << sum << " \n";
+    l.sort();
+    minim = l.front();
+    maks = l.back();
+    for(list<int>::iterator it=l.begin(); it!=l.end(); it++) sum+=*it;
+    cout << minim << " " << maks << " " << sum << " \n";
     return 0;
 }
