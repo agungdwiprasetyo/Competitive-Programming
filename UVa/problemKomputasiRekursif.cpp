@@ -92,14 +92,15 @@ int main() {
 	solve();
 	clock_t finish1 = clock(); // stop timer
 	double timeExec1 = (double)(finish1 - mulai1) / CLOCKS_PER_SEC;
-	
+	printf("Time Execution (cara matrix)  : %f sekon\n", timeExec1);
+
+	printf("\n");
 	clock_t mulai2 = clock(); // mulai timer
-	solveMainstream();
+	//solveMainstream();
 	clock_t finish2 = clock(); // stop timer
 	double timeExec2 = (double)(finish2 - mulai2) / CLOCKS_PER_SEC;
-	
-	printf("\nTime Execution (cara matrix)  : %f sekon\n", timeExec1);
 	printf("Time Execution (cara rekursif): %f sekon\n", timeExec2);
-	printf("Optimasi: %.0fx\n",(double)(timeExec2/timeExec1));
+	
+	printf("\nOptimasi: %.0fx\n",(double)(timeExec2/timeExec1));
 	return 0;
 }
