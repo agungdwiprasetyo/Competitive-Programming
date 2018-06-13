@@ -1,5 +1,6 @@
 /**
  * Problem from https://pandaoj.com/problem/IDEAFUSE16B
+ * ACM ICPC IdeaFuse 2016 problem B, solve with Breadth-First Search (BFS) algorithm.
 **/
 
 #include <bits/stdc++.h>
