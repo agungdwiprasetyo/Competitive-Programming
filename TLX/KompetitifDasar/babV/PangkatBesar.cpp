@@ -18,10 +18,10 @@ long pangkat(long a, long b){
 }
 
 int main(){
-	long x, y;
-	cin >> x >> y;
-	long has = pangkat(x, y);
-	if (pow(x, y) >= mod) {
+    long x, y;
+    cin >> x >> y;
+    long has = pangkat(x, y);
+    if (pow(x, y) >= mod) {
         long tmp = has;
         int digit = 0;
         if (has == 0) digit = 1;
@@ -33,6 +33,6 @@ int main(){
         while (digit--) cout<<0;
         cout << has << endl;
     } else cout << has << endl;
-
-	return 0;
+    
+    return 0;
 }
